@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using ConsoleTools.IO.Delete.Arguments;
 using ConsoleTools.Common.Extensions;
 using ConsoleTools.Common.UserInterface;
@@ -21,7 +22,6 @@ namespace ConsoleTools.IO.Delete
             {
                 ProcessArguments(args);
 
-//                ConsoleHelper.ProcessDirectedInput(ProcessLine);
                 ConsoleHelper.ReadAllLines().ForEach(ProcessLine);
             }
             catch (Exception e)
@@ -44,42 +44,76 @@ namespace ConsoleTools.IO.Delete
 
         private static void ProcessLine(string line)
         {
-            var isDir = File.GetAttributes(line).HasFlag(FileAttributes.Directory);
-            if (isDir)
+            try
             {
-                ProcessDirectory(line);
+                var isDir = File.GetAttributes(line).HasFlag(FileAttributes.Directory);
+                if (isDir)
+                {
+                    ProcessDirectory(line);
+                }
+                else
+                {
+                    ProcessFile(line);
+                }
             }
-            else
+            catch (DirectoryNotFoundException)
             {
-                ProcessFile(line);
+                // ignored
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error processing '{line}': {ex.Message}");
             }
         }
 
         private static void ProcessDirectory(string directory)
         {
+            if (!Directory.Exists(directory)) return;
+
             if (!_filesOnly)
             {
                 DeleteDirectory(directory);
+                return;
             }
-            else if (!_removeEmptyDirs) return;
+
+            if (!_removeEmptyDirs) return;
 
             var entries = Directory.GetFileSystemEntries(directory, "*.*", SearchOption.TopDirectoryOnly);
             if (entries.Length == 0) DeleteDirectory(directory);
-
         }
 
         private static void DeleteDirectory(string directory)
         {
-            Console.WriteLine($"Removing directory{(_recursive ? " recursively" : "")}: {directory}");
+            Console.Write($"Removing directory{(_recursive ? " recursively" : "")}: {directory}");
             if (!IsConfirmed) return;
-            Directory.Delete(directory, _recursive);
+            try
+            {
+                Directory.Delete(directory, _recursive);
+            }
+            catch (DirectoryNotFoundException)
+            {
+                // ignore
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private static void ProcessFile(string file)
         {
+            if (!File.Exists(file)) return;
+
             Console.WriteLine($"Deleting file: {file}");
             if (!IsConfirmed) return;
-            File.Delete(file);
+            try
+            {
+                File.Delete(file);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private static bool IsConfirmed
