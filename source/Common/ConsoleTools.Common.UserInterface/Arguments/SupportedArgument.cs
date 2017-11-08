@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using ConsoleTools.Common.Utils;
 
 namespace ConsoleTools.Common.UserInterface.Arguments
 {
@@ -36,13 +38,42 @@ namespace ConsoleTools.Common.UserInterface.Arguments
         {
             return supportedArguments.Where(arg => arg.Required).All(arg => arg.Find(argumentParser) != null);
         }
+
+        public static class Factory
+        {
+            public static IEnumerable<SupportedArgument> GetAssemblySupportedArguments(System.Reflection.Assembly assembly = null)
+            {
+                if (assembly == null) assembly = System.Reflection.Assembly.GetEntryAssembly();
+
+                var baseType = typeof(SupportedArgument);
+                foreach (var type in assembly.GetTypes())
+                {
+                    if (type.IsAbstract || !baseType.IsAssignableFrom(type)) continue;
+                    if (!(Try.Ignore(() => Activator.CreateInstance(type)) is SupportedArgument instance)) continue;
+                    yield return instance;
+                }
+            }
+
+            public static IDictionary<SupportedArgument, ArgumentInfo?> GetAssemblySupportedArguments(ArgumentParser argumentParser, System.Reflection.Assembly assembly = null)
+            {
+                if (assembly == null) assembly = System.Reflection.Assembly.GetEntryAssembly();
+                var supportedArgs = GetAssemblySupportedArguments(assembly);
+                return supportedArgs.ToDictionary(arg => arg, arg => arg.Find(argumentParser));
+            }
+        }
     }
 
     public abstract class SupportedOnableArgument : SupportedArgument, IOnable
     {
         #region Implementation of IOnable
         public abstract bool DefaultState { get; }
-        public bool IsOn(ArgumentParser argumentParser) => this.Find(argumentParser)?.IsOff != true && this.DefaultState;
+        public bool IsOn(ArgumentParser argumentParser)
+        {
+            var arg = this.Find(argumentParser);
+            return arg != null && arg.Value.HasFlag 
+                ? arg.Value.IsOn 
+                : this.DefaultState;
+        }
         #endregion Implementation of IOnable
     }
 

@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConsoleTools.Common.Extensions\ConsoleTools.Common.Extensions.csproj" />
+    <ProjectReference Include="..\ConsoleTools.Common.Utils\ConsoleTools.Common.Utils.csproj" />
   </ItemGroup>
 
 </Project>
