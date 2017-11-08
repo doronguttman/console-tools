@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{7530FEDA-DD92-4AC0-BC87-3B9BB35C9957}"
+	ProjectSection(SolutionItems) = preProject
+		Common\GlobalAssemblyInfo.cs = Common\GlobalAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IO", "IO", "{B2F10C63-183F-4380-967D-E6D278A513EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTools.IO.List", "IO\ConsoleTools.IO.List\ConsoleTools.IO.List.csproj", "{0FFE56BB-67DA-459F-B22A-375078E63F7F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTools.Common.UserInterface", "Common\ConsoleTools.Common.UserInterface\ConsoleTools.Common.UserInterface.csproj", "{AC10518A-C266-4CC4-981B-9DFDB5AE58E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTools.Common.Extensions", "Common\ConsoleTools.Common.Extensions\ConsoleTools.Common.Extensions.csproj", "{07E129FF-2232-4822-B62F-3BC1A28578DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{2FB1713C-E716-4747-85FA-58C562586349}"
+	ProjectSection(SolutionItems) = preProject
+		Common\Assets\GlobalAssemblyInfo.cs = Common\Assets\GlobalAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{BC60ABBE-3549-4D70-B9A6-A4A9C59B6645}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTools.Test.Common.UserInterface", "Test\ConsoleTools.Test.Common.UserInterface\ConsoleTools.Test.Common.UserInterface.csproj", "{978DFFC2-DFDB-4873-8970-ABBE99AC749A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Text", "Text", "{4DA20BD9-C911-48B0-B112-3ADD9AD86243}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTools.Text.Regex", "Text\ConsoleTools.Text.Regex\ConsoleTools.Text.Regex.csproj", "{7A1EC76D-76F5-4E3E-85A4-6162735C6B29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FFE56BB-67DA-459F-B22A-375078E63F7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FFE56BB-67DA-459F-B22A-375078E63F7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FFE56BB-67DA-459F-B22A-375078E63F7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FFE56BB-67DA-459F-B22A-375078E63F7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC10518A-C266-4CC4-981B-9DFDB5AE58E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC10518A-C266-4CC4-981B-9DFDB5AE58E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC10518A-C266-4CC4-981B-9DFDB5AE58E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC10518A-C266-4CC4-981B-9DFDB5AE58E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07E129FF-2232-4822-B62F-3BC1A28578DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E129FF-2232-4822-B62F-3BC1A28578DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E129FF-2232-4822-B62F-3BC1A28578DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E129FF-2232-4822-B62F-3BC1A28578DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{978DFFC2-DFDB-4873-8970-ABBE99AC749A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{978DFFC2-DFDB-4873-8970-ABBE99AC749A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{978DFFC2-DFDB-4873-8970-ABBE99AC749A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{978DFFC2-DFDB-4873-8970-ABBE99AC749A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A1EC76D-76F5-4E3E-85A4-6162735C6B29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A1EC76D-76F5-4E3E-85A4-6162735C6B29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A1EC76D-76F5-4E3E-85A4-6162735C6B29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A1EC76D-76F5-4E3E-85A4-6162735C6B29}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0FFE56BB-67DA-459F-B22A-375078E63F7F} = {B2F10C63-183F-4380-967D-E6D278A513EE}
+		{AC10518A-C266-4CC4-981B-9DFDB5AE58E0} = {7530FEDA-DD92-4AC0-BC87-3B9BB35C9957}
+		{07E129FF-2232-4822-B62F-3BC1A28578DA} = {7530FEDA-DD92-4AC0-BC87-3B9BB35C9957}
+		{2FB1713C-E716-4747-85FA-58C562586349} = {7530FEDA-DD92-4AC0-BC87-3B9BB35C9957}
+		{978DFFC2-DFDB-4873-8970-ABBE99AC749A} = {BC60ABBE-3549-4D70-B9A6-A4A9C59B6645}
+		{7A1EC76D-76F5-4E3E-85A4-6162735C6B29} = {4DA20BD9-C911-48B0-B112-3ADD9AD86243}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C994C726-3697-4F95-A4C5-0B39DEE04754}
+	EndGlobalSection
+EndGlobal
