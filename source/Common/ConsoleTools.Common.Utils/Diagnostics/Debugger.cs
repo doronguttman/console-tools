@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace ConsoleTools.Common.Utils.Diagnostics
 {
@@ -7,12 +8,23 @@ namespace ConsoleTools.Common.Utils.Diagnostics
         [Conditional("DEBUG")]
         public static void BreakOnDebug(bool condition = true)
         {
-            if (condition) System.Diagnostics.Debugger.Break();
+            BreakOnDebug(() => condition);
+        }
+
+        [Conditional("DEBUG")]
+        public static void BreakOnDebug(Func<bool> predicate)
+        {
+            if (predicate()) System.Diagnostics.Debugger.Break();
         }
 
         public static void Break(bool condition = true)
         {
-            if (condition) System.Diagnostics.Debugger.Break();
+            Break(() => condition);
+        }
+
+        public static void Break(Func<bool> predicate)
+        {
+            if (predicate()) System.Diagnostics.Debugger.Break();
         }
     }
 }
