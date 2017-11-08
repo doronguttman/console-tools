@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConsoleTools.Common.UserInterface;
+using ConsoleTools.Common.UserInterface.Arguments;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ConsoleTools.Test.Common.UserInterface
+namespace ConsoleTools.Test.Common.UserInterface.Arguments
 {
     [TestClass]
-    public class ArgumentsTests
+    public class BasicTests
     {
         [TestMethod]
         public void EmptyArgs()
         {
-            var mock = new string[0];
-            var args = new Arguments(mock);
+            var args = new ArgumentParser(Mocks.EmptySet);
 
             Assert.IsNotNull(args);
             Assert.IsFalse(args.Any);
@@ -24,8 +23,7 @@ namespace ConsoleTools.Test.Common.UserInterface
         [TestMethod]
         public void WhitespaceArg()
         {
-            var mock = new[] { "" };
-            var args = new Arguments(mock);
+            var args = new ArgumentParser(Mocks.WhitespacedItem);
 
             Assert.IsNotNull(args);
             Assert.IsFalse(args.Any);
@@ -36,7 +34,7 @@ namespace ConsoleTools.Test.Common.UserInterface
         [TestMethod]
         public void NoArgs()
         {
-            var args = new Arguments(null);
+            var args = new ArgumentParser(null);
 
             Assert.IsNotNull(args);
             Assert.IsFalse(args.Any);
@@ -48,8 +46,7 @@ namespace ConsoleTools.Test.Common.UserInterface
         [TestMethod]
         public void SingleArg()
         {
-            var mock = new[] { "Foo" };
-            var args = new Arguments(mock);
+            var args = new ArgumentParser(Mocks.SingleItem);
 
             Assert.IsNotNull(args);
             Assert.IsTrue(args.Any);
@@ -67,14 +64,13 @@ namespace ConsoleTools.Test.Common.UserInterface
         [TestMethod]
         public void MultiArgs()
         {
-            var mock = new[] { "Foo", "Bar" };
-            var args = new Arguments(mock);
+            var args = new ArgumentParser(Mocks.MultipleItems);
 
             Assert.IsNotNull(args);
             Assert.IsTrue(args.Any);
             Assert.AreEqual(2, args.Count);
 
-            foreach (var key in mock)
+            foreach (var key in Mocks.MultipleItems)
             {
                 var arg = args[key];
                 Assert.IsTrue(arg.HasKey);
@@ -86,8 +82,7 @@ namespace ConsoleTools.Test.Common.UserInterface
         [TestMethod]
         public void HasFlags()
         {
-            var mock = new[] { "+Foo", "++Bar", "-alice", "--bob", "/john" };
-            var args = new Arguments(mock);
+            var args = new ArgumentParser(Mocks.FlaggedItems);
 
             foreach (var key in args.Properties.Keys)
             {
@@ -99,8 +94,7 @@ namespace ConsoleTools.Test.Common.UserInterface
         [TestMethod]
         public void FlagsOn()
         {
-            var mock = new[] { "+Foo", "++Bar" };
-            var args = new Arguments(mock);
+            var args = new ArgumentParser(Mocks.OnFlaggedItems);
 
             foreach (var key in args.Properties.Keys)
             {
@@ -114,8 +108,7 @@ namespace ConsoleTools.Test.Common.UserInterface
         [TestMethod]
         public void FlagsOff()
         {
-            var mock = new[] { "-Foo", "--Bar" };
-            var args = new Arguments(mock);
+            var args = new ArgumentParser(Mocks.OffFlaggedItems);
 
             foreach (var key in args.Properties.Keys)
             {
@@ -129,8 +122,7 @@ namespace ConsoleTools.Test.Common.UserInterface
         [TestMethod]
         public void Valued()
         {
-            var mock = new[] { "Foo:true", "Bar=false", "-alice:\"one two\"", "bob=\"two one\"" };
-            var args = new Arguments(mock);
+            var args = new ArgumentParser(Mocks.ValuedItems);
 
             foreach (var key in args.Properties.Keys)
             {
@@ -143,8 +135,7 @@ namespace ConsoleTools.Test.Common.UserInterface
         [TestMethod]
         public void IgnoreDuplicates()
         {
-            var mock = new[] { "+foO=", "Foo=bar", "foo", "-fOo=BAR" };
-            var args = new Arguments(mock);
+            var args = new ArgumentParser(Mocks.DuplicateItems);
 
             Assert.AreEqual(1, args.Count);
             var foo = args.Properties.Values.First();
@@ -159,15 +150,14 @@ namespace ConsoleTools.Test.Common.UserInterface
         [TestMethod]
         public void Numbered()
         {
-            var mock = new[] { "Foo=true", "Bar=false", "-alice:\"one two\"", "bob=\"two one\"" };
-            var args = new Arguments(mock);
+            var args = new ArgumentParser(Mocks.ValuedItems);
 
             for (var i = 0; i < args.Count; i++)
             {
                 var arg = args[i];
                 Assert.IsNotNull(arg);
 
-                Assert.AreEqual(mock[i], arg.Source);
+                Assert.AreEqual(Mocks.ValuedItems[i], arg.Source);
             }
         }
     }

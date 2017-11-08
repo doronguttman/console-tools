@@ -51,7 +51,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArgumentsTests.cs" />
+    <Compile Include="Arguments\BasicTests.cs" />
+    <Compile Include="Arguments\Mocks.cs" />
+    <Compile Include="Arguments\SupportedArgumentsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
