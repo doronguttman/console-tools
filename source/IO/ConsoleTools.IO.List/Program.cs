@@ -17,8 +17,8 @@ namespace ConsoleTools.IO.List
                 var sw = Stopwatch.StartNew();
                 var arguments = new ArgumentParser(args);
 
-                ConsoleTools.Common.Utils.Diagnostics.Debugger.BreakOnDebug(arguments.TryGetValue("debug", out var arg) && arg.IsOn);
-
+                Common.Utils.Diagnostics.Debugger.BreakOnDebug(() => new DebugSupportedArgument().IsOn(arguments));
+                
                 var stats = arguments.GetValueOrNull("stats")?.IsOn == true;
 
                 var path = GetPath(arguments);
