@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,6 +29,18 @@ namespace ConsoleTools.Common.Extensions
         public static void ForEach<T>(this IEnumerable<T> items, Action<T> action)
         {
             foreach (var item in items) action(item);
+        }
+
+        public static T FirstOfType<T>(this IEnumerable baseItems)
+        {
+            if (baseItems == null) throw new ArgumentNullException(nameof(baseItems));
+            return baseItems.OfType<T>().First();
+        }
+
+        public static T FirstOfTypeOrDefault<T>(this IEnumerable baseItems)
+        {
+            if (baseItems == null) throw new ArgumentNullException(nameof(baseItems));
+            return baseItems.OfType<T>().FirstOrDefault();
         }
 
         private struct AnonymousEqualityComparer<T> : IEqualityComparer<T>
