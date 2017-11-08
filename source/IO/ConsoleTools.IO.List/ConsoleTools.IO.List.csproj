@@ -45,6 +45,9 @@
     <Compile Include="..\..\Common\Assets\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Arguments\DirectoriesArgument.cs" />
+    <Compile Include="Arguments\FilesArgument.cs" />
+    <Compile Include="Arguments\RecursiveArgument.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,6 +55,10 @@
     <ProjectReference Include="..\..\Common\ConsoleTools.Common.UserInterface\ConsoleTools.Common.UserInterface.csproj">
       <Project>{ac10518a-c266-4cc4-981b-9dfdb5ae58e0}</Project>
       <Name>ConsoleTools.Common.UserInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\ConsoleTools.Common.Utils\ConsoleTools.Common.Utils.csproj">
+      <Project>{cb3e9756-aa43-4c26-9c69-9fcf24fb9063}</Project>
+      <Name>ConsoleTools.Common.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
