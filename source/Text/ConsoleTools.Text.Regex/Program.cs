@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
-using ConsoleTools.Common.UserInterface;
+using ConsoleTools.Common.UserInterface.Arguments;
 
 namespace ConsoleTools.Text.Regex
 {
@@ -12,9 +12,10 @@ namespace ConsoleTools.Text.Regex
             try
             {
                 var sw = Stopwatch.StartNew();
-                var arguments = new Arguments(args);
+                var arguments = new ArgumentParser(args);
 
-                ConnectDebugger(arguments);
+                ConsoleTools.Common.Utils.Diagnostics.Debugger.BreakOnDebug(arguments.TryGetValue("debug", out var arg) && arg.IsOn);
+
                 var stats = arguments.GetValueOrNull("stats")?.IsOn == true;
 
                 var filter = GetFilter(arguments);
@@ -40,7 +41,7 @@ namespace ConsoleTools.Text.Regex
             }
         }
 
-        private static Func<string, bool> GetFilter(Arguments arguments)
+        private static Func<string, bool> GetFilter(ArgumentParser arguments)
         {
             var arg = arguments.GetValueOrNull("regex") ?? arguments.GetValueOrNull(0);
             if (arg == null) return null;
@@ -56,12 +57,6 @@ namespace ConsoleTools.Text.Regex
             return (arguments.GetValueOrNull("neg") ?? arguments.GetValueOrNull("negative"))?.IsOn == true
                 ? (Func<string, bool>) (str => !regex.IsMatch(str))
                 : (str => regex.IsMatch(str));
-        }
-
-        [Conditional("DEBUG")]
-        private static void ConnectDebugger(Arguments arguments)
-        {
-            if (arguments.TryGetValue("debug", out var arg) && arg.IsOn) Debugger.Break();
         }
     }
 }

@@ -54,6 +54,10 @@
       <Project>{AC10518A-C266-4CC4-981B-9DFDB5AE58E0}</Project>
       <Name>ConsoleTools.Common.UserInterface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\ConsoleTools.Common.Utils\ConsoleTools.Common.Utils.csproj">
+      <Project>{cb3e9756-aa43-4c26-9c69-9fcf24fb9063}</Project>
+      <Name>ConsoleTools.Common.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
