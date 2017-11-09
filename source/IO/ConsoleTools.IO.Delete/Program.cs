@@ -84,7 +84,7 @@ namespace ConsoleTools.IO.Delete
 
         private static void DeleteDirectory(string directory)
         {
-            Console.Write($"Removing directory{(_recursive ? " recursively" : "")}: {directory}");
+            Console.WriteLine($"Removing directory{(_recursive ? " recursively" : "")}: {directory}");
             if (!IsConfirmed) return;
             try
             {
